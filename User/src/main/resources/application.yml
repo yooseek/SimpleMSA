@@ -38,7 +38,7 @@ logging:
     com.example.userservicemsa: debug
 
 management:
-  endpoint:
+  endpoints:
     web:
       exposure:
         include: refresh, health, beans
