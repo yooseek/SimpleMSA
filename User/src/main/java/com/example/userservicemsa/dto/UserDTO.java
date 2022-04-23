@@ -3,6 +3,7 @@ package com.example.userservicemsa.dto;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class UserDTO {
@@ -13,4 +14,6 @@ public class UserDTO {
     private Date createdAt;
 
     private String encryptedPwd;
+
+    private List<ResponseOrder> orders;
 }

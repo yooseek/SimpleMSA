@@ -28,3 +28,11 @@ eureka:
 # Argument
 greeting:
   message: Welcome to the Simple E-commerce
+token:
+  expiration_time: 86400000 # one-day
+  secret: kyungseek_authorization_jwt_web_token_secure_version1_encrypted_algorithm_hs512  # 충분한 길이 필요, must be logger 256 bite
+
+
+logging:
+  level:
+    com.example.userservicemsa: debug
