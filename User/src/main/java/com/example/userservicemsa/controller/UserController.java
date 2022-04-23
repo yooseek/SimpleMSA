@@ -40,10 +40,10 @@ public class UserController {
     public String status(){
         // Return the port number
         return String.format("It's Working in User Service"
-                + " /n Port Number " + environment.getProperty("local.server.port")
-                + " /n Server Port Number " + environment.getProperty("server.port")
-                + " /n Token secret " + environment.getProperty("token.secret")
-                + " /n Token expiration_time " + environment.getProperty("token.expiration_time")
+                + " Port Number " + environment.getProperty("local.server.port")
+                + " Server Port Number " + environment.getProperty("server.port")
+                + " Token secret " + environment.getProperty("token.secret")
+                + " Token expiration_time " + environment.getProperty("token.expiration_time")
         );
     }
 
