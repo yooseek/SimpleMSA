@@ -1,0 +1,6 @@
+encrypt:
+  key-store:
+    location: file:///C:\\git\\Git_Repository\\SimpleMSA\\keyStore\\msaEncryptionKey.jks
+    password: kyungseek
+    alias: apiEncryptionKey
+# key: seek

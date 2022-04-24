@@ -6,6 +6,10 @@ spring:
     config:
       server:
         git:
-          uri: file:///C:\git\Git_Repository\SimpleMSA
+#          uri: file:///C:\git\Git_Repository\SimpleMSA # local git
+          uri: https://github.com/yooseek/SimpleMSA #remote git
+          default-label: main
+#          username: [username]  # id
+#          password: [password]  # password
   application:
     name: config-service
