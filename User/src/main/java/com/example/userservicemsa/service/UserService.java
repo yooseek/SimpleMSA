@@ -29,13 +29,17 @@ public class UserService implements IUserService{
     UserRepository userRepository;
     BCryptPasswordEncoder bCryptPasswordEncoder;    // password Encoding
     Environment environment;
+    RestTemplate restTemplate;
 
-    public UserService (UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,Environment environment){
+    public UserService (UserRepository userRepository,
+                        BCryptPasswordEncoder bCryptPasswordEncoder,
+                        Environment environment,
+                        RestTemplate restTemplate){
         this.userRepository =userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.environment = environment;
+        this.restTemplate = restTemplate;
     }
-
 
     @Override
     public UserDTO createUser(UserDTO userDTO) {
@@ -63,12 +67,12 @@ public class UserService implements IUserService{
 
         UserDTO userDTO = new ModelMapper().map(user,UserDTO.class);
 
-        RestTemplate rt = new RestTemplate();
+
         String orderURL = String.format(environment.getProperty("order-service.url"),userId);
         log.info(orderURL);
 
         List<ResponseOrder> orderList =
-                rt.exchange(orderURL, HttpMethod.GET, null,
+                restTemplate.exchange(orderURL, HttpMethod.GET, null,
                         new ParameterizedTypeReference<List<ResponseOrder>>() {
                 }).getBody();
 
