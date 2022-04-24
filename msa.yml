@@ -1,6 +1,6 @@
 token:
   expiration_time: 86400000 # one-day
-  secret: kyungseek_authorization_jwt_web_token_secure_encrypted_algorithm_hs512_version1  # 충분한 길이 필요, must be logger 256 bite
+  secret: '{cipher}AQAjXQ6rlnPxFGQJfhm1g6raP+1BpwVa99lRbMDw30xwes/ZsO1ufrAa0oW84IqHpdp2ZowM2Y9c3FSuPQPuqkvaZkQRRiUzbrd1gwVqqycCdNvZ5n/IA/uVvLcaALz/SE7ll4GgjGAIjzHWyllmefER7l7j1s9kmplaCwQSszomwljZjq73Z8gTZpakXZI0DxGsA368Vu7AVpbzPI+0zmlHe6Qs84eZMFuzfKI3mV/hiAS7GpX8Bcpis+jw5+UiHJ/uvIw/EUbNhljoINUGE94s8tiDG37IGjAFgS+nXbR4KmBkYP3uSBCMngEb6TP4DPlY9iLoY8JeIJYRaNepJ8PHpr7faO749ZMdQ0SUoOoEkgIH+oc0WkKfjrGerFN+hxO7geKBHnhzx04/ykT5lMExd4Sn7rnsd2lrR+1lZ6BAEZEByxF7qabRr6LkAh6+yoFczRo9v39B6iU3l4c0it0S'  # 충분한 길이 필요, must be logger 256 bite
 
 gateway:
   ip: 121.167.204.15
