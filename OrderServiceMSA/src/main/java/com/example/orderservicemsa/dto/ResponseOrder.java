@@ -10,15 +10,13 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseOrder {
     private String productId;
     private Integer qty;
     private Integer unitPrice;
     private Integer totalPrice;
-    private Date createAt;
+    private Date createdAt;
 
     private String orderId;
     private String userId;

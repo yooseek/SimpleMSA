@@ -35,7 +35,7 @@ greeting:
 
 logging:
   level:
-    com.example.userservicemsa: debug
+    com.example.userservicemsa.client: debug
 
 management:
   endpoints:

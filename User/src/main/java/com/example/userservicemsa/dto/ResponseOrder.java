@@ -8,9 +8,6 @@ import lombok.extern.jackson.Jacksonized;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Jacksonized
 public class ResponseOrder {
     private String productId;
     private Integer qty;

@@ -1,13 +1,16 @@
 package com.example.userservicemsa.service;
 
+import com.example.userservicemsa.client.OrderServiceClient;
 import com.example.userservicemsa.domain.UserEntity;
 import com.example.userservicemsa.domain.UserRepository;
 import com.example.userservicemsa.dto.ResponseOrder;
 import com.example.userservicemsa.dto.UserDTO;
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
@@ -36,16 +39,19 @@ public class UserService implements IUserService{
     BCryptPasswordEncoder bCryptPasswordEncoder;    // password Encoding
     Environment environment;
     RestTemplate restTemplate;
+    OrderServiceClient orderServiceClient;
 
     @Autowired
     public UserService (UserRepository userRepository,
                         BCryptPasswordEncoder bCryptPasswordEncoder,
                         Environment environment,
-                        RestTemplate restTemplate){
+                        RestTemplate restTemplate,
+                        OrderServiceClient orderServiceClient){
         this.userRepository =userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.environment = environment;
         this.restTemplate = restTemplate;
+        this.orderServiceClient = orderServiceClient;
     }
 
     @Override
@@ -75,7 +81,8 @@ public class UserService implements IUserService{
         UserDTO userDTO = new ModelMapper().map(user,UserDTO.class);
 
 
-        String orderURL = String.format(environment.getProperty("order-service.url"),userId);
+        // RestTemplate
+        /*String orderURL = String.format(environment.getProperty("order-service.url"),userId);
         log.info(orderURL);
 
         ResponseEntity<List<ResponseOrder>> orderListResponse =
@@ -83,7 +90,17 @@ public class UserService implements IUserService{
                         new ParameterizedTypeReference<List<ResponseOrder>>(){
                         });
 
-        List<ResponseOrder> orderList = orderListResponse.getBody();
+        List<ResponseOrder> orderList = orderListResponse.getBody();*/
+
+        // Frign client
+        /*List<ResponseOrder> orderList = null;
+        try {
+            orderList = orderServiceClient.getOrders(userId);
+        } catch (FeignException ex){
+            log.error(ex.getMessage());
+        }*/
+
+        List<ResponseOrder> orderList = orderServiceClient.getOrders(userId);
 
         userDTO.setOrders(orderList);
 

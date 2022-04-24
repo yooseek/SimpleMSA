@@ -32,6 +32,6 @@ public class OrderEntity implements Serializable {
 
     @Column(nullable = false, updatable = false, insertable = false)
     @ColumnDefault(value = "CURRENT_TIMESTAMP") // 현재 시간 가져오기
-    private Date createAt;
+    private Date createdAt;
 
 }
