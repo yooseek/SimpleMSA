@@ -71,10 +71,12 @@ public class UserService implements IUserService{
         String orderURL = String.format(environment.getProperty("order-service.url"),userId);
         log.info(orderURL);
 
-        List<ResponseOrder> orderList =
+        ResponseEntity<List<ResponseOrder>> orderListResponse =
                 restTemplate.exchange(orderURL, HttpMethod.GET, null,
                         new ParameterizedTypeReference<List<ResponseOrder>>() {
-                }).getBody();
+                });
+
+        List<ResponseOrder> orderList = orderListResponse.getBody();
 
         userDTO.setOrders(orderList);
 
