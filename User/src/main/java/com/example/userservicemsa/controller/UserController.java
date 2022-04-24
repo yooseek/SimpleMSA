@@ -8,6 +8,7 @@ import com.example.userservicemsa.service.UserService;
 import com.example.userservicemsa.vo.Greeting;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -25,10 +26,11 @@ public class UserController {
     private Environment environment;
     private UserService userService;
 
+    @Autowired
     public UserController(Environment environment, Greeting greeting,UserService userService){
         this.environment = environment;
         this.greeting = greeting;
-        this.userService =userService;
+        this.userService = userService;
     }
     @GetMapping("/welcome")
     public String welcom(){

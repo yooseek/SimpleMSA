@@ -7,8 +7,11 @@ import com.example.userservicemsa.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
@@ -17,7 +20,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -31,6 +37,7 @@ public class UserService implements IUserService{
     Environment environment;
     RestTemplate restTemplate;
 
+    @Autowired
     public UserService (UserRepository userRepository,
                         BCryptPasswordEncoder bCryptPasswordEncoder,
                         Environment environment,
@@ -72,9 +79,9 @@ public class UserService implements IUserService{
         log.info(orderURL);
 
         ResponseEntity<List<ResponseOrder>> orderListResponse =
-                restTemplate.exchange(orderURL, HttpMethod.GET, null,
-                        new ParameterizedTypeReference<List<ResponseOrder>>() {
-                });
+                restTemplate.exchange(orderURL,HttpMethod.GET,null,
+                        new ParameterizedTypeReference<List<ResponseOrder>>(){
+                        });
 
         List<ResponseOrder> orderList = orderListResponse.getBody();
 

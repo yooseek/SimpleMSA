@@ -22,7 +22,7 @@ public class UserServiceMsaApplication {
     }
 
     @Bean
-    //@LoadBalanced
+    @LoadBalanced
     public RestTemplate getRestTemplate(){
         return new RestTemplate();
     }
