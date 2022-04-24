@@ -6,4 +6,4 @@ gateway:
   ip: 121.167.204.15
   
 order-service:
-  url: http://127.0.0.1:5001/order-service/%s/orders
+  url: http://127.0.0.1:5005/order-service/%s/orders

@@ -65,6 +65,8 @@ public class UserService implements IUserService{
 
         RestTemplate rt = new RestTemplate();
         String orderURL = String.format(environment.getProperty("order-service.url"),userId);
+        log.info(orderURL);
+
         List<ResponseOrder> orderList =
                 rt.exchange(orderURL, HttpMethod.GET, null,
                         new ParameterizedTypeReference<List<ResponseOrder>>() {
