@@ -33,7 +33,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 //        http.authorizeRequests().antMatchers("/users/**").permitAll();
         http.authorizeRequests().antMatchers("/**")
-                .access("hasIpAddress('"+ "121.167.204.15" + "')")
+                .access("hasIpAddress('"+ "121.167.204.55" + "')")
 //                .hasIpAddress("121.167.204.15") // 허용할 IP 주소 - 스프링 버전 문제.. 낮은 버전은 이 주석대로..
                 .and()
                 .addFilter(getAuthenticationFilter()); // 인증 과정에 필터 등록
