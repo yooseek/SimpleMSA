@@ -5,11 +5,16 @@ server:
 spring:
   application:
     name: order-service # Eureka Server name
+#  datasource:
+#    url: jdbc:h2:mem:test
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#    password:
   datasource:
-    url: jdbc:h2:mem:test
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:mariadb://localhost:3306/mydb
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: seek
   h2:
     console:
       enabled: true
@@ -19,11 +24,11 @@ spring:
     open-in-view: true
     hibernate:
       ddl-auto: update
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
     generate-ddl: true #  ?? ???? ??? ?? ?? ??? DDL?? ???? DB? ????.
-
+#    database-platform: org.hibernate.dialect.MySQLInnoDBDialect
 eureka:
   # lease-expiration-duration-in-seconds: 2 # ?????? ??? ?? ?? ?? ?? ??? ???????? 2? ???
   instance:
