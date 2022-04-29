@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
@@ -40,18 +42,21 @@ public class UserService implements IUserService{
     Environment environment;
     RestTemplate restTemplate;
     OrderServiceClient orderServiceClient;
+    CircuitBreakerFactory circuitBreakerFactory;
 
     @Autowired
     public UserService (UserRepository userRepository,
                         BCryptPasswordEncoder bCryptPasswordEncoder,
                         Environment environment,
                         RestTemplate restTemplate,
-                        OrderServiceClient orderServiceClient){
+                        OrderServiceClient orderServiceClient,
+                        CircuitBreakerFactory circuitBreakerFactory){
         this.userRepository =userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.environment = environment;
         this.restTemplate = restTemplate;
         this.orderServiceClient = orderServiceClient;
+        this.circuitBreakerFactory = circuitBreakerFactory;
     }
 
     @Override
@@ -100,7 +105,15 @@ public class UserService implements IUserService{
             log.error(ex.getMessage());
         }*/
 
-        List<ResponseOrder> orderList = orderServiceClient.getOrders(userId);
+        // ErrorDecoder
+//        List<ResponseOrder> orderList = orderServiceClient.getOrders(userId);
+
+        // CircuitBreaker
+        log.info("Before call orders microservice");
+        CircuitBreaker circuitBreaker = circuitBreakerFactory.create("circuitbreaker"); // circuitbreakter name
+        List<ResponseOrder> orderList = circuitBreaker.run(()-> orderServiceClient.getOrders(userId),
+                throwable -> new ArrayList<>()); // circuitbreaker에 등록할 메서드와 오류 시 반환할 객체
+        log.info("after call orders microservice");
 
         userDTO.setOrders(orderList);
 
